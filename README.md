@@ -55,10 +55,10 @@ server {
 -	Tạo thư mục cho website và thêm tệp html hoặc php vào 
 Sudo mkdir -p /home/www/test.com
 Tạo 1 file trong test.com là index.html đơn giản ( search trên mạng )
--	Phân quyền cho user nginx 
-chown -R nginx:nginx /home/www/test.com 
+- Phân quyền cho user nginx 
+	chown -R nginx:nginx /home/www/test.com 
 
--	Tạo vitual host chạy https 
+- Tạo vitual host chạy https 
 Tạo SSL tự ký 
 Tạo thư mục lưu chứng chỉ và khóa : 
 sudo mkdir /etc/nginx/ssl
@@ -67,7 +67,7 @@ sudo openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/ssl/nginx.key -out /e
  (  phần này sẽ phải điền PEM pass phare sau đó sẽ loại bỏ pass phare ) 
 Câu lệnh : openssl rsa -in /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.key
 
--	Chỉnh sửa file cấu hình vitualhost đã cấu hình http bên trên 
+- Chỉnh sửa file cấu hình vitualhost đã cấu hình http bên trên 
 sudo vim /etc/nginx/conf.d/test.com.conf
 
 
