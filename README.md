@@ -70,10 +70,14 @@ server {
     
 }
 
-- Tạo thư mục cho website và thêm tệp html hoặc php vào 
+- Tạo thư mục cho website và thêm tệp html hoặc php vào
+
 Sudo mkdir -p /home/www/test.com
+
 Tạo 1 file trong test.com là index.html đơn giản ( search trên mạng )
-- Phân quyền cho user nginx 
+
+- Phân quyền cho user nginx
+  
 chown -R nginx:nginx /home/www/test.com 
 
 # Tạo vitual host chạy https 
