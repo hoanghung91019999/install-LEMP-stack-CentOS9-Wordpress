@@ -141,8 +141,10 @@ server {
 }
 
 server {
+
     listen 80;
-    server_name example.com www.example.com;
+    
+    server_name test.com www.test.com;
 
     return 301 https://$host$request_uri;
 }
