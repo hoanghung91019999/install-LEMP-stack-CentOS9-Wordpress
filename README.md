@@ -37,7 +37,7 @@ Sudo vim /etc/nginx/conf.d/test.com
 - Thêm cấu hình server block;
   
 server {
-    listen 80;  # Lắng nghe cổng 80 cho HTTP
+    listen 80;
     server_name test.com ;
   
     root /home/www/test.com;  
