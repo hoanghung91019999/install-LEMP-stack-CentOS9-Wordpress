@@ -1,8 +1,12 @@
 # install-LEMP-stack-CentOS9-Wordpress
 I./ environments
+
 1.centosOS9
+
 2.Mariadb-server
+
 3.php-fpm
+
 4.wordpress newversion
 
 # install centosOS9
