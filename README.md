@@ -34,7 +34,7 @@ Tạo 1 file cấu hình trong /etc/nginx/conf.d/
 
 Sudo vim /etc/nginx/conf.d/test.com
 
-- Thêm cấu hình server block;
+- Thêm cấu hình server block:
   
 server {
     listen 80;
