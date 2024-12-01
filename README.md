@@ -174,7 +174,7 @@ create database wordpress;
 
 - Tạo user
 
-create user 'wordpress'@localhost identified by 'password';
+create user 'wordpress'@localhost identified by 'Citigo@2025';
 
 - Cấp quyền cho user vào database
 
@@ -183,4 +183,18 @@ grant all privileges on *.* to 'wordpress'@localhost;
 - Xác nhận
 
 flush privileges;
+
+- kiểm tra người dùng đã tạo
+  
+SELECT user, host FROM mysql.user;
+
+- kiểm tra quyền ngườu dùng :
+
+SHOW GRANTS FOR 'username'@'hostname';
+
+điền username và hostname
+
+
+# Cài php-fpm
+
 
