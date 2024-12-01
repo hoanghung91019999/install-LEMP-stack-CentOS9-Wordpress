@@ -152,3 +152,31 @@ server {
 - Restart lại nginx sau đó truy cập vào web qua IP 
 - Sửa file etc host trên hệ điều hành để truy cập qua domain
 - lưu ý : tắt SElinux không sẽ không truy cập được
+
+# install mariadb
+câu lênh : 
+
+sudo dnf install mariadb -y
+
+đặt mật khẩu cho database: 
+
+mysql_secure_installation
+
+- truy cập vào database
+
+mariadb -u root -p ( đăng nhập với user root ) 
+
+Tạo database và user:
+
+# Tạo database
+create database wordpress;
+
+# Tạo user
+create user 'wordpress'@localhost identified by 'password';
+
+# Cấp quyền cho user vào database
+grant all privileges on *.* to 'wordpress'@localhost;
+
+# Xác nhận
+flush privileges;
+
