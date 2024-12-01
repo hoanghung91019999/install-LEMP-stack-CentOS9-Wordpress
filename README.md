@@ -29,15 +29,19 @@ Mục đích : Hỗ trợ nhiều trang web trên một máy chủ (Multiple Web
 -	thực tế là bạn sẽ cấu hình một server block (khối máy chủ) trong file cấu hình của Nginx
 -	file cấu hình của nginx sẽ nằm trong : /etc/nginx/conf.d/
 -	Giả sử bạn muốn tạo VirtualHost cho một website có tên miền là test.com và thư mục gốc là /home/www/test.com
+  
 Tạo 1 file cấu hình trong /etc/nginx/conf.d/
+
 Sudo vim /etc/nginx/conf.d/test.com
--	Thêm cấu hình server block : 
+
+- Thêm cấu hình server block : 
 server {
     listen 80;  # Lắng nghe cổng 80 cho HTTP
-    server_name test.com ;  # Tên miền của bạn
-
-    root /home/www/test.com;  # Đường dẫn đến thư mục gốc của website
-    index index.html index.htm index.php;  # Tên các tệp index
+    server_name test.com ;
+  
+    root /home/www/test.com;  
+    index index.html index.htm index.php;
+  
     access_log /var/log/nginx/example.com.access.log;
     error_log /var/log/nginx/example.com.error.log;
  	
