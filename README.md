@@ -11,18 +11,18 @@ I./ environments
 3. hướng dẫn cài và install trong vmware theo đường link : https://www.youtube.com/watch?v=hTe4oVQpUH0&t=684s
 # install nginx version: nginx/1.20.1
 sudo yum install nginx
-nginx -v  ## kiểm tra version vừa cài
--	Mặc định nginx sẽ chạy trên cổng 80 (http://your_IP)
-•	Bật service và cho phép cổng firewall
+nginx -v## kiểm tra version vừa cài
+- Mặc định nginx sẽ chạy trên cổng 80 (http://your_IP)
+# Bật service và cho phép cổng firewall
 systemctl start nginx
 sudo firewall-cmd --permanent --add-service=http
 sudo firewall-cmd --permanent --add-service=https
 sudo firewall-cmd –reload
 
-•	Tạo vitualhost chạy http
+# Tạo vitualhost chạy http
 Mục đích : Hỗ trợ nhiều trang web trên một máy chủ (Multiple Websites on One Server): Một trong những mục đích chính của VirtualHost là cho phép bạn chạy nhiều website trên cùng một máy chủ. Ví dụ, bạn có thể có một website chạy tại www.site1.com và một website khác chạy tại www.site2.com, tất cả trên cùng một máy chủ và cùng một địa chỉ IP. VirtualHost giúp máy chủ phân biệt và xử lý các yêu cầu từ các tên miền khác nhau, và phục vụ các nội dung tương ứng.
 
-Tạo vitual host trên nginx 
+# Tạo vitual host trên nginx 
 -	thực tế là bạn sẽ cấu hình một server block (khối máy chủ) trong file cấu hình của Nginx
 -	file cấu hình của nginx sẽ nằm trong : /etc/nginx/conf.d/
 -	Giả sử bạn muốn tạo VirtualHost cho một website có tên miền là test.com và thư mục gốc là /home/www/test.com
@@ -35,16 +35,13 @@ server {
 
     root /home/www/test.com;  # Đường dẫn đến thư mục gốc của website
     index index.html index.htm index.php;  # Tên các tệp index
-
-    # Đường dẫn log
     access_log /var/log/nginx/example.com.access.log;
     error_log /var/log/nginx/example.com.error.log;
-
+ 	
     location / {
-        try_files $uri $uri/ =404;  # Kiểm tra nếu tệp hoặc thư mục tồn tại
+        try_files $uri $uri/ =404;  
     }
-
-    # Cấu hình cho PHP (nếu sử dụng PHP)
+ 	
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/var/run/php/php-fpm.sock;  # Địa chỉ FastCGI cho PHP
@@ -52,13 +49,13 @@ server {
         include fastcgi_params;
     }
 }
--	Tạo thư mục cho website và thêm tệp html hoặc php vào 
+- Tạo thư mục cho website và thêm tệp html hoặc php vào 
 Sudo mkdir -p /home/www/test.com
 Tạo 1 file trong test.com là index.html đơn giản ( search trên mạng )
 - Phân quyền cho user nginx 
-	chown -R nginx:nginx /home/www/test.com 
+chown -R nginx:nginx /home/www/test.com 
 
-- Tạo vitual host chạy https 
+# Tạo vitual host chạy https 
 Tạo SSL tự ký 
 Tạo thư mục lưu chứng chỉ và khóa : 
 sudo mkdir /etc/nginx/ssl
@@ -69,7 +66,6 @@ Câu lệnh : openssl rsa -in /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx
 
 - Chỉnh sửa file cấu hình vitualhost đã cấu hình http bên trên 
 sudo vim /etc/nginx/conf.d/test.com.conf
-
 
 server {
     listen 443 ssl;
