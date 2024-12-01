@@ -39,17 +39,13 @@ Sudo vim /etc/nginx/conf.d/test.com
 server {
     listen 80;
     server_name test.com ;
-  
     root /home/www/test.com;  
     index index.html index.htm index.php;
-  
     access_log /var/log/nginx/example.com.access.log;
-    error_log /var/log/nginx/example.com.error.log;
- 	
+    error_log /var/log/nginx/example.com.error.log;	
     location / {
         try_files $uri $uri/ =404;  
-    }
- 	
+    } 	
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_pass unix:/var/run/php/php-fpm.sock;  # Địa chỉ FastCGI cho PHP
