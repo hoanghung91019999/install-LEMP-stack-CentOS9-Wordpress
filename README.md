@@ -168,19 +168,19 @@ mariadb -u root -p ( đăng nhập với user root )
 
 Tạo database và user:
 
--Tạo database
+- Tạo database
 
 create database wordpress;
 
--Tạo user
+- Tạo user
 
 create user 'wordpress'@localhost identified by 'password';
 
--Cấp quyền cho user vào database
+- Cấp quyền cho user vào database
 
 grant all privileges on *.* to 'wordpress'@localhost;
 
--Xác nhận
+- Xác nhận
 
 flush privileges;
 
