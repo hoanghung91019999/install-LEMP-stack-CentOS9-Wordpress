@@ -150,4 +150,5 @@ server {
 }
 
 - Restart lại nginx sau đó truy cập vào web qua IP 
-- Sửa file etc host trên hệ điều hành để truy cập qua domain 
+- Sửa file etc host trên hệ điều hành để truy cập qua domain
+- lưu ý : tắt SElinux không sẽ không truy cập được
