@@ -107,29 +107,37 @@ sudo vim /etc/nginx/conf.d/test.com.conf
 file config như sau : 
 
 server {
+
     listen 443 ssl;
+    
     server_name test.com www.test.com;
 
     ssl_certificate /etc/nginx/ssl/nginx.crt;
+    
     ssl_certificate_key /etc/nginx/ssl/nginx.key;
 
     ssl_protocols TLSv1.2 TLSv1.3;
+    
     ssl_ciphers 'HIGH:!aNULL:!MD5';
-		ssl_prefer_server_ciphers on;
+    
+    ssl_prefer_server_ciphers on;
 
-    # Log các thông tin truy cập và lỗi
     access_log /var/log/nginx/test.com.access.log;
+    
     error_log /var/log/nginx/test.com.error.log warn;
 
     root /home/www/test.com;
+    
     index index.html index.htm;
 
     location / {
+    
         try_files $uri $uri/ =404;
+	
     }
 
-    # Redirect HTTP to HTTPS
     error_page 497 https://$host$request_uri;
+    
 }
 
 server {
@@ -139,5 +147,5 @@ server {
     return 301 https://$host$request_uri;
 }
 
--	Restart lại nginx sau đó truy cập vào web qua IP 
--	Sửa file etc host trên hệ điều hành để truy cập qua domain 
+- Restart lại nginx sau đó truy cập vào web qua IP 
+- Sửa file etc host trên hệ điều hành để truy cập qua domain 
