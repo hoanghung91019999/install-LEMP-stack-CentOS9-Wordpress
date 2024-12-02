@@ -214,6 +214,28 @@ sudo dnf install -y php-fpm php-cli php-mysqlnd
 
 sudo vim /etc/php-fpm.d/www.conf
 
+thay đổi cấu hình 
+
+[www]
+listen = 127.0.0.1:9000
+listen.allowed_clients = 127.0.0.1
+listen.owner = nginx
+listen.group = nginx
+listen.mode = 0660
+user = nginx
+group = nginx
+pm = dynamic
+pm.max_children = 50
+pm.start_servers = 5
+pm.min_spare_servers = 5
+pm.max_spare_servers = 35
+slowlog = /var/log/php-fpm/www-slow.log
+php_admin_value[error_log] = /var/log/php-fpm/www-error.log
+php_admin_flag[log_errors] = on
+php_value[session.save_handler] = files
+php_value[session.save_path] = /var/lib/php/session
+security.limit_extensions = .php .php3 .php4 .php5 .php7
+
 - Khởi động và kích hoạt PHP-FPM
 
 sudo systemctl enable php-fpm --now
