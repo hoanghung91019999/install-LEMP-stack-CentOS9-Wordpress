@@ -235,5 +235,50 @@ Thêm cấu hình sau: vim /etc/nginx/conf.d/test.com.conf
         fastcgi_index index.php;
 	
 }
+# cài đặt wordpress
+- Điều hướng đến thư mục web root
 
+cd /home/www/test.com
+
+- Tải WordPress
+
+sudo curl -O https://wordpress.org/latest.tar.gz
+
+- Giải nén WordPress
+
+sudo tar -xvf latest.tar.gz
+
+sudo mv wordpress/* .
+
+sudo rm -rf wordpress latest.tar.gz
+
+- Đặt quyền sở hữu và phân quyền
+  
+sudo chown -R apache:apache /var/www/html
+
+sudo chmod -R 755 /var/www/html
+
+- Cấu hình WordPress
+- copy config mẫu
+
+sudo cp wp-config-sample.php wp-config.php
+
+- Sửa file wp-config.php
+
+sudo vim wp-config.php
+
+Cập nhật thông tin database
+
+define('DB_NAME', 'wordpress_db');
+define('DB_USER', 'wordpress_user');
+define('DB_PASSWORD', 'strong_password');
+define('DB_HOST', 'localhost');
+
+- khởi động lại nginx
+
+systemctl restart nginx
+
+# lưu ý : 
+
+- cấu hình trong /etc/nginx/conf.d/test.com trong thư mục gốc /home/www/test.com đưa file index.php lên trước index.html nginx sẽ ưu tiên đọc file nào đứng trước
 
