@@ -270,8 +270,11 @@ sudo vim wp-config.php
 Cập nhật thông tin database
 
 define('DB_NAME', 'wordpress_db');
+
 define('DB_USER', 'wordpress_user');
+
 define('DB_PASSWORD', 'strong_password');
+
 define('DB_HOST', 'localhost');
 
 - khởi động lại nginx
