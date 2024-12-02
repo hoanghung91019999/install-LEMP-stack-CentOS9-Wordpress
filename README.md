@@ -254,7 +254,7 @@ php_value[session.save_path] = /var/lib/php/session
 
 security.limit_extensions = .php .php3 .php4 .php5 .php7
 
-- lưu ý : listen sẽ lắng nghe theo port hoặc theo socket unix. đường dẫn của socket unix /var/run/php-fpm/www.sock. nếu cùng php giao tiếp với nginx trên cùng 1 máy sẽ sử dụng socket, nếu khác máy sẽ sử dụng cổng TCP và port vd : fastcgi_pass 127.0.0.1:9000;
+- lưu ý : listen sẽ lắng nghe theo port hoặc theo socket unix. đường dẫn của socket unix /var/run/php-fpm/www.sock. nếu php giao tiếp với nginx trên cùng 1 máy sẽ sử dụng socket, nếu khác máy sẽ sử dụng cổng TCP và port vd : fastcgi_pass 127.0.0.1:9000;
   
 - Khởi động và kích hoạt PHP-FPM
 
