@@ -196,5 +196,44 @@ SHOW GRANTS FOR 'username'@'hostname';
 
 
 # Cài php-fpm
+- Cài đặt kho EPEL và Remi
+
+sudo dnf install -y epel-release
+
+sudo dnf install -y https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+
+- Bật kho Remi và cài đặt PHP-FPM
+
+sudo dnf module list php
+
+sudo dnf module enable php:remi-8.2 -y
+
+sudo dnf install -y php-fpm php-cli php-mysqlnd
+
+- Kiểm tra và cấu hình PHP-FPM
+
+sudo vim /etc/php-fpm.d/www.conf
+
+- Khởi động và kích hoạt PHP-FPM
+
+sudo systemctl enable php-fpm --now
+
+sudo systemctl status php-fpm
+
+- Sửa file cấu hình VitualHost chạy được file /php qua php-fpm
+
+Thêm cấu hình sau: vim /etc/nginx/conf.d/test.com.conf
+
+    location ~ \.php$ {
+    
+        include fastcgi_params;
+	
+        fastcgi_pass unix:/var/run/php-fpm/www.sock;
+	
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	
+        fastcgi_index index.php;
+	
+}
 
 
