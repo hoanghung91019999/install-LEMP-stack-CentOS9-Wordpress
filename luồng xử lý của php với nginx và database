@@ -1,0 +1,63 @@
+Khi bạn gửi một yêu cầu đến một website WordPress được lưu trữ trên một server với Nginx, PHP-FPM, và database cùng trên một máy, luồng xử lý diễn ra như sau:
+
+1. Trình duyệt gửi yêu cầu đến server
+Yêu cầu HTTP/HTTPS: Khi người dùng nhập URL vào trình duyệt (ví dụ: http://example.com), trình duyệt gửi một yêu cầu HTTP hoặc HTTPS đến máy chủ Nginx.
+Yêu cầu này chứa thông tin như:
+Tên miền (domain): example.com
+Đường dẫn (path): / hoặc /about, v.v.
+Các header HTTP và tham số khác (cookies, user-agent, v.v.).
+2. Nginx nhận và xử lý yêu cầu
+Kiểm tra server block: Nginx kiểm tra các tệp cấu hình (ví dụ: /etc/nginx/nginx.conf, /etc/nginx/sites-enabled/) để tìm server block tương ứng với tên miền và đường dẫn được yêu cầu.
+Nếu không có cấu hình phù hợp, Nginx trả về lỗi 404 Not Found hoặc 403 Forbidden.
+Xử lý tệp tĩnh: Nếu yêu cầu là cho một tệp tĩnh (ví dụ: hình ảnh, CSS, JS), Nginx sẽ trả tệp trực tiếp từ thư mục được định nghĩa trong cấu hình, mà không cần gọi PHP.
+3. Gửi yêu cầu động tới PHP-FPM
+Nếu URL yêu cầu là tệp PHP (ví dụ: index.php), Nginx chuyển tiếp yêu cầu đến PHP-FPM bằng fastcgi_pass thông qua Unix socket hoặc TCP/IP (tùy cấu hình Nginx):
+nginx
+Sao chép mã
+location ~ \.php$ {
+    include fastcgi_params;
+    fastcgi_pass unix:/var/run/php-fpm.sock; # Hoặc 127.0.0.1:9000
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_index index.php;
+}
+4. PHP-FPM xử lý yêu cầu
+Tìm file PHP: PHP-FPM nhận yêu cầu từ Nginx, định vị file PHP tương ứng (ví dụ: index.php).
+Thực thi mã PHP: PHP-FPM xử lý mã PHP, bao gồm:
+Chạy mã WordPress (bao gồm plugin, theme, và core WordPress).
+Tạo các truy vấn SQL để lấy dữ liệu từ database.
+Kết nối tới database (MySQL/MariaDB) và thực thi các truy vấn.
+5. Database xử lý truy vấn
+MySQL/MariaDB nhận truy vấn: Database nhận các truy vấn SQL từ PHP (ví dụ: lấy bài viết, thông tin người dùng).
+Thực thi truy vấn: Database xử lý các truy vấn, tìm kiếm dữ liệu trong các bảng, và trả kết quả cho PHP.
+Kết quả trả về PHP: Kết quả này thường ở dạng mảng hoặc đối tượng (JSON, array) mà PHP có thể xử lý.
+6. PHP tạo HTML và trả về Nginx
+Sau khi nhận dữ liệu từ database, PHP-FPM:
+Ghép dữ liệu vào các template (theme) WordPress.
+Tạo ra HTML hoàn chỉnh của trang web.
+Trả HTML đó về Nginx thông qua giao thức FastCGI.
+7. Nginx trả phản hồi HTTP cho trình duyệt
+Nginx nhận HTML từ PHP-FPM và gửi phản hồi HTTP/HTTPS lại cho trình duyệt của người dùng.
+Nếu có các tài nguyên phụ thuộc (hình ảnh, CSS, JS), trình duyệt sẽ gửi thêm các yêu cầu khác để tải chúng, và Nginx xử lý trực tiếp những tệp tĩnh này.
+Tóm tắt các bước xử lý
+Browser → Nginx: Gửi yêu cầu HTTP.
+Nginx → PHP-FPM: Chuyển tiếp yêu cầu xử lý mã PHP.
+PHP-FPM → Database: Gửi truy vấn SQL đến MySQL/MariaDB.
+Database → PHP-FPM: Trả dữ liệu kết quả truy vấn.
+PHP-FPM → Nginx: Trả HTML hoàn chỉnh.
+Nginx → Browser: Trả kết quả HTTP cho trình duyệt.
+Lưu ý tối ưu hóa
+Caching:
+
+Sử dụng plugin cache (như WP Super Cache, W3 Total Cache) để giảm tải cho PHP và database.
+Cấu hình Nginx FastCGI Cache để lưu trữ các kết quả HTML đã được tạo sẵn.
+PHP-FPM Pool:
+
+Điều chỉnh các thông số như pm.max_children, pm.start_servers, và pm.max_requests để phù hợp với lượng truy cập.
+Database Optimization:
+
+Tối ưu chỉ mục và bảng trong MySQL/MariaDB.
+Sử dụng query cache (nếu cần).
+Static Content:
+
+Tách các nội dung tĩnh (hình ảnh, CSS, JS) sang CDN hoặc bộ nhớ đệm tại Nginx.
+Cấu hình và tối ưu hóa các bước này sẽ giúp cải thiện hiệu suất của hệ thống WordPress của bạn.
