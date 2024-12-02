@@ -38,4 +38,4 @@ upstream định định đúng, nếutruy cập bằng http thì không cần 4
 tạo chứng chỉ ssl tự ký 
 nếu 2 server backend sử dụng phương thức truy cập ssl thì nginx proxy cũng phải sử dụng ssl ( nếu không sẽ không truy cập được ) 
 đảm bảo các server thông nhau
-server_name đặt đúng tên của domain name của 2 backend, sau đó chỉ cần định nghĩa trong file etc host là IP của nginx proxy
+server_name đặt đúng tên của domain name của 2 backend, sau đó chỉ cần định nghĩa trong file etc host là IP của nginx proxy và server name
