@@ -1,8 +1,9 @@
 keepalived VRRP
-VRRP (Virtual Router Redundancy Protocol) là một giao thức được sử dụng để đảm bảo tính khả dụng và dự phòng cho các router hoặc gateway trong mạng. Keepalived sử dụng VRRP để cung cấp tính năng dự phòng gateway (cổng mặc định) cho các máy chủ trong mạng, đảm bảo rằng khi một router (hoặc máy chủ) gặp sự cố, một router khác sẽ thay thế và tiếp tục cung cấp dịch vụ mà không có gián đoạn.
-
+VRRP (Virtual Router Redundancy Protocol) là một giao thức được sử dụng để đảm bảo tính khả dụng và dự phòng cho các router hoặc gateway trong mạng. 
+Keepalived sử dụng VRRP để cung cấp tính năng dự phòng gateway (cổng mặc định) cho các máy chủ trong mạng, đảm bảo rằng khi một router (hoặc máy chủ) gặp sự cố, một router khác sẽ thay thế và tiếp tục cung cấp dịch vụ mà không có gián đoạn.
 Các thành phần chính trong VRRP:
-Virtual Router (Router ảo): Đây là router đại diện cho một địa chỉ IP ảo (VIP). Các máy chủ trong mạng sẽ sử dụng IP ảo này làm gateway. VRRP đảm bảo rằng IP ảo sẽ luôn có một router "chủ" hoặc "primary" để xử lý lưu lượng. Nếu router chính gặp sự cố, một router "phụ" sẽ thay thế.
+Virtual Router (Router ảo): Đây là router đại diện cho một địa chỉ IP ảo (VIP). Các máy chủ trong mạng sẽ sử dụng IP ảo này làm gateway. VRRP đảm bảo rằng IP ảo sẽ luôn có một router "chủ" hoặc "primary" để xử lý lưu lượng.
+Nếu router chính gặp sự cố, một router "phụ" sẽ thay thế.
 
 Master Router: Là router đảm nhận vai trò cổng mặc định (gateway) cho các máy chủ hoặc thiết bị trong mạng. Đây là router chính có IP ảo (VIP).
 
