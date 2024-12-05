@@ -19,13 +19,13 @@ nginx -v## kiểm tra version vừa cài
 - Mặc định nginx sẽ chạy trên cổng 80 (http://your_IP)
 # Bật service và cho phép cổng firewall
 systemctl start nginx
-
+```
 sudo firewall-cmd --permanent --add-service=http
 
 sudo firewall-cmd --permanent --add-service=https
 
 sudo firewall-cmd –reload
-
+```
 # Tạo vitualhost chạy http
 Mục đích : Hỗ trợ nhiều trang web trên một máy chủ (Multiple Websites on One Server): Một trong những mục đích chính của VirtualHost là cho phép bạn chạy nhiều website trên cùng một máy chủ. Ví dụ, bạn có thể có một website chạy tại www.site1.com và một website khác chạy tại www.site2.com, tất cả trên cùng một máy chủ và cùng một địa chỉ IP. VirtualHost giúp máy chủ phân biệt và xử lý các yêu cầu từ các tên miền khác nhau, và phục vụ các nội dung tương ứng.
 
