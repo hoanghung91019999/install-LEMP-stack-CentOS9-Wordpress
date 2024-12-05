@@ -1,14 +1,9 @@
 # install-LEMP-stack-CentOS9-Wordpress
-I./ environments
-
-1.centosOS9
-
-2.Mariadb-server
-
-3.php-fpm
-
-4.wordpress newversion
-
+## environments
+- centosOS9
+- Mariadb-server
+- php-fpm
+- wordpress newversion
 # install centosOS9
 1. download ISO theo đường link : https://www.centos.org/download/
 2. install ISO lên vmware
