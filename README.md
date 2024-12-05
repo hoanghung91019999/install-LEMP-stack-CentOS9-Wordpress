@@ -35,11 +35,11 @@ Mục đích : Hỗ trợ nhiều trang web trên một máy chủ (Multiple Web
 -	Giả sử bạn muốn tạo VirtualHost cho một website có tên miền là test.com và thư mục gốc là /home/www/test.com
   
 Tạo 1 file cấu hình trong /etc/nginx/conf.d/
-
+```
 Sudo vim /etc/nginx/conf.d/test.com
-
+```
 - Thêm cấu hình server block:
-
+```
 server {
 
     listen 80;
@@ -73,7 +73,7 @@ server {
     }
     
 }
-
+```
 - Tạo thư mục cho website và thêm tệp html hoặc php vào
 
 Sudo mkdir -p /home/www/test.com
