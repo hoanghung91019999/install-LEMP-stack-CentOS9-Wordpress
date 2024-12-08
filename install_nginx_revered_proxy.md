@@ -3,6 +3,19 @@
 - Reverse Proxy đóng vai trò là một trung gian giữa client (người dùng hoặc ứng dụng) và một hoặc nhiều server backend.
 -  Cụ thể, thay vì client trực tiếp gửi yêu cầu đến server backend, chúng sẽ được gửi qua Nginx, và Nginx sẽ chuyển tiếp yêu cầu đó đến server backend thích hợp.
 -  Sau đó, Nginx nhận phản hồi từ server backend và gửi lại cho client.
+### các tính năng mà nginx proxy hỗ trợ
+  + Load Balancing
+  + Reverse Proxy
+  +  Caching (Lưu cache)
+  +  SSL/TLS Termination
+  +  WebSocket Proxying
+  +  Authentication (Xác thực)
+  +  Rate Limiting (Giới hạn tốc độ)
+  +  IP Blocking và Filtering (Chặn IP và lọc)
+  +  Custom Headers (Tiêu đề tùy chỉnh)
+  +  Load Balancing Health Checks (Kiểm tra sức khỏe của backend)
+  +  Logging (Ghi log)
+  +  Access Control (Kiểm soát quyền truy cập)
 # Workflow
 ![image](https://github.com/user-attachments/assets/b303c175-742c-4ddd-bd52-afbe453c1e2f)
 
