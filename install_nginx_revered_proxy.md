@@ -183,6 +183,8 @@ upstream backend_servers {
 |GRPC|	grpc_pass|	Microservices hoặc ứng dụng gRPC|
 |Unix|	proxy_pass	|Bất kỳ backend nào qua Unix socket|
 - _có thể định tuyến ở layer 4 bằng TCP/UDP nếu sử dụng khối stream_
+## Một server chưa nhiều website
+- nếu một server chưa nhiều website chỉ cần định tuyến yêu cầu của người dùng tới từng domain một
 # tối ưu hóa cấu hình 
 - trong một số trường hợp người dùng đang gọi tới nginx proxy và nginx proxy đã xử lý SSL và domain name vì vậy trong cấu hình của backend không cần cấu hình SSL và domain name
 - tuy nhiên với wordpress có thể cần cấu hình chính xác domain trong cơ sở dữ liệu hoặc trong file cấu hình (wp-config.php). vì vậy ở backend vẫn cần cấu hình domain name
