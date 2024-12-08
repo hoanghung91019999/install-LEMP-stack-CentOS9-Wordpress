@@ -346,7 +346,7 @@ systemctl restart nginx
 **_lưu ý : cấu hình trong /etc/nginx/conf.d/test.com trong thư mục gốc /home/www/test.com đưa file index.php lên trước index.html nginx sẽ ưu tiên đọc file nào đứng trước_**
 
 # Mô hình hoạt động của WordPress
-- **Người dùng yêu cầu trang web** : Trình duyệt của người dùng gửi yêu cầu HTTP đến Web Server (nginx hoặc Apache).
+- **Người dùng yêu cầu trang web** : Trình duyệt của người dùng gửi yêu cầu HTTP đến Web Server nginx
 - **Web Server chuyển tiếp yêu cầu**: Nếu yêu cầu là PHP (ví dụ: trang bài viết hoặc trang admin), Web Server chuyển tiếp yêu cầu này đến PHP-FPM để xử lý.
 - **PHP-FPM xử lý mã PHP**: PHP-FPM sẽ thực thi mã PHP của WordPress, bao gồm việc truy vấn cơ sở dữ liệu MySQL/MariaDB để lấy dữ liệu (chẳng hạn như nội dung bài viết, thông tin người dùng, cài đặt).
 - **Gửi kết quả về Web Server**: Sau khi PHP-FPM xử lý xong, kết quả (HTML) được trả về Web Server.
