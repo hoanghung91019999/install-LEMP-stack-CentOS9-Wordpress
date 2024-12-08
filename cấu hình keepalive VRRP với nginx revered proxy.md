@@ -28,9 +28,9 @@
 ### Cách hoạt động của VRRP trong Keepalived:
 - Cấu hình các router: Keepalived sử dụng VRRP để cấu hình các máy chủ (hoặc router) tham gia vào một nhóm và chia sẻ một địa chỉ IP ảo.
 - Truyền thông giữa các router: Các router sẽ gửi các gói tin VRRP định kỳ để thông báo về tình trạng của chúng. Gói tin này bao gồm các thông tin như trạng thái của router (Master hay Backup), mức độ ưu tiên và thông tin về IP ảo.cách VRRP gửi gói tin từ master thông báo tới các backup 
-      + Mặc định Gói tin VRRP được gửi qua giao thức IP multicast ( hoạt động ở layer 3 ) IP là  224.0.0.18
-      + VRRP hỗ trợ cả giao thức IP unicast. Sẽ Gửi trực tiếp đến từng router qua unicast. cái này cần cấu hình cụ thể địa chỉ IP Tuy nhiên sẽ tốn ít băng thông và bảo mật hơn
-      + Nếu Backup không nhận được gói tin VRRP từ Master trong thời gian bằng 3 lần khoảng quảng bá (advert_int), nó sẽ coi Master đã gặp sự cố và khởi động quy trình failover.
+  + Mặc định Gói tin VRRP được gửi qua giao thức IP multicast ( hoạt động ở layer 3 ) IP là  224.0.0.18
+  + VRRP hỗ trợ cả giao thức IP unicast. Sẽ Gửi trực tiếp đến từng router qua unicast. cái này cần cấu hình cụ thể địa chỉ IP Tuy nhiên sẽ tốn ít băng thông và bảo mật hơn
+  + Nếu Backup không nhận được gói tin VRRP từ Master trong thời gian bằng 3 lần khoảng quảng bá (advert_int), nó sẽ coi Master đã gặp sự cố và khởi động quy trình failover.
 - Chuyển giao quyền điều khiển: Nếu router chính (Master) không còn hoạt động (do gặp sự cố hoặc ngừng gửi gói tin VRRP), một router phụ (Backup) với mức độ ưu tiên cao sẽ tự động trở thành Master và tiếp quản IP ảo.
 - Mặc định máy chủ có độ ưu tiên cao hơn sẽ giành quyền quản lý VIP, khi chúng bị lỗi và hoạt động trở lại VIP sẽ được đưa trả cho máy chủ có priority cao hơn.( để tắt tính năng này có thể chọn nopreempt trong cấu hình )
 # install và cấu hình keepalive VRRP 
