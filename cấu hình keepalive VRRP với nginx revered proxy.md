@@ -181,6 +181,7 @@ fi
 
 -  trong trường hợp trên mỗi instance đang quản lý một VIP và router sẽ quảng bá các VIP mình đang quảng lý Gói tin VRRP với virtual_router_id sẽ được gửi đi theo từng service
 -  Nếu có sự cố xảy ra trên service nào Keepalived vẫn sẽ tự động chuyển trạng thái mà không cần đến track_scripts
+-  cấu hình track_scripts sẽ để tách biệt về mặt dịch vụ.nếu chỉ cần HA cho service A không cần cho server B thì bắt buộc phải có track_script để theo dõi tình trạng của service A
 -  Tuy nhiên Khi bạn muốn Keepalived không chỉ dựa vào trạng thái VRRP mà còn kiểm tra trạng thái của dịch vụ trước khi thay đổi trạng thái của VIP.
    + Khi có yêu cầu về phục hồi dịch vụ (service failover) khi dịch vụ gặp sự cố mà không chỉ dựa vào trạng thái mạng.
    + đây là cơ chế health check mà Keepalive cung cấp
@@ -191,6 +192,7 @@ chmod +x /etc/keepalived/check_serviceA.sh
 chmod +x /etc/keepalived/check_serviceB.sh
 ```
 -  ở server backup cấu hình tương tự chỉ cần thay đổi tham số priority
+-  có thể không cần cấu hình track_scripts trên backup
 -  **_Có thể cấu hình notification bằng cấu hình sau_**
 ```
 global_defs {
@@ -203,5 +205,14 @@ global_defs {
     router_id SERVER_1  # Đặt tên định danh cho server này
 }
 ```
+- _**trường hợp không kích hoạt được failover khi xử dụng track_script**_
+- khi sử dụng track_script mà network giữa các server gặp vấn đề mà heakth check service vẫn hoạt động
+- khi đó failover sẽ không được kích hoạt
+- khi sử dụng track_script failover được kích hoạt dựa trên trạng thái dịch vụ ( wegith bị giảm xuống và bị đẩy xuống làm backup ) không dựa vào network còn nếu không sử dụng track_script thì sẽ phụ thuộc vào network
+- có 2 cách khắc phục tình trạng network giữa các server gặp vấn đề mà heakth check service vẫn hoạt động :
+    + cấu hình track_scripts trên MASTER nhưng không cấu hình trên BACKUP
+    + thêm 1 scripts check network trên master để ping tới backup
 ##### Xử lý lỗi trong quá trình đọc file
 - Keepalived sẽ ghi log vào file log hệ thống (thường là /var/log/messages hoặc /var/log/syslog) nếu gặp lỗi trong file cấu hình.
+
+
